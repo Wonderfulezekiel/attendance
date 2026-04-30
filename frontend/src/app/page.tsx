@@ -5,7 +5,8 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import {
   ArrowRight, ShieldCheck, MapPin, CheckCircle2,
-  ScanLine, BarChart3, BellRing, User
+  ScanLine, BarChart3, BellRing, User,
+  Lock, LayoutDashboard, Users, Settings, QrCode
 } from 'lucide-react';
 
 export default function LandingPage() {
@@ -83,35 +84,106 @@ export default function LandingPage() {
                 </div>
               </div>
 
-              {/* Right Visuals - Abstract & Structural Mockup */}
-              <div className="relative w-full aspect-square md:aspect-[4/3] lg:aspect-square bg-muted/30 border border-border flex items-center justify-center p-4 md:p-12 overflow-hidden group">
-                {/* Background Grid Pattern */}
-                <div className="absolute inset-0 opacity-20 dark:opacity-40" style={{ backgroundImage: 'radial-gradient(currentColor 1px, transparent 1px)', backgroundSize: '24px 24px', color: 'var(--foreground)' }} />
+              {/* Right Visuals - Realistic SaaS Dashboard Mockup */}
+              <div className="relative w-full aspect-square md:aspect-[4/3] lg:aspect-square flex items-center justify-center p-4 md:p-8 perspective-[2000px]">
+                {/* Ambient background glows */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-primary/20 blur-[100px] rounded-full pointer-events-none" />
                 
-                {/* Abstract Device Structure */}
-                <div className="relative w-full max-w-sm bg-card border-2 border-foreground shadow-[16px_16px_0px_0px_var(--foreground)] transition-transform duration-500 group-hover:-translate-y-2 group-hover:-translate-x-2 flex flex-col">
-                  {/* Mockup Header */}
-                  <div className="h-14 border-b-2 border-foreground flex items-center justify-between px-6 bg-muted">
-                    <div className="flex items-center gap-3">
-                      <div className="w-3 h-3 rounded-full bg-destructive" />
-                      <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                      <div className="w-3 h-3 rounded-full bg-green-500" />
-                    </div>
-                    <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Scanning</div>
-                  </div>
+                {/* Dashboard Window */}
+                <div className="relative w-full max-w-lg bg-background rounded-xl border border-border/50 shadow-2xl overflow-hidden flex flex-col transform rotate-y-[-10deg] rotate-x-[5deg] transition-transform duration-700 hover:rotate-0 hover:scale-[1.02]">
                   
-                  {/* Mockup Body */}
-                  <div className="p-8 flex flex-col items-center justify-center bg-card aspect-square relative overflow-hidden">
-                    {/* Scanning Animation */}
-                    <div className="absolute top-0 left-0 w-full h-full z-10 pointer-events-none">
-                       <div className="w-full h-1 bg-green-500/80 blur-[2px] animate-[scan_3s_ease-in-out_infinite]" />
+                  {/* MacOS Style Titlebar */}
+                  <div className="h-10 bg-muted/40 border-b border-border/50 flex items-center px-4 gap-2">
+                    <div className="flex gap-1.5">
+                      <div className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-amber-400/80" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-green-400/80" />
+                    </div>
+                    <div className="mx-auto flex items-center gap-2 bg-background border border-border/50 rounded-md px-24 py-1">
+                      <Lock className="w-3 h-3 text-muted-foreground" />
+                      <span className="text-[10px] text-muted-foreground font-medium">app.attendance.com/live/csc411</span>
+                    </div>
+                  </div>
+
+                  {/* App Layout */}
+                  <div className="flex flex-1 h-[320px]">
+                    {/* Mini Sidebar */}
+                    <div className="w-12 bg-muted/20 border-r border-border/50 flex flex-col items-center py-4 gap-4">
+                      <div className="w-6 h-6 rounded bg-primary text-primary-foreground flex items-center justify-center mb-2">
+                        <ScanLine className="w-3 h-3" />
+                      </div>
+                      <LayoutDashboard className="w-4 h-4 text-muted-foreground" />
+                      <Users className="w-4 h-4 text-muted-foreground" />
+                      <Settings className="w-4 h-4 text-muted-foreground mt-auto" />
                     </div>
 
-                    <ScanLine className="w-32 h-32 text-foreground mb-6" strokeWidth={1} />
-                    
-                    <div className="inline-flex items-center gap-2 bg-green-500/10 text-green-600 dark:text-green-400 px-4 py-2 text-sm font-semibold border border-green-500/20">
-                      <CheckCircle2 className="w-4 h-4" />
-                      Verified Location
+                    {/* Main Content Area */}
+                    <div className="flex-1 p-5 flex flex-col gap-4 bg-background/50">
+                      
+                      {/* Header */}
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h3 className="text-sm font-bold text-foreground">CSC 411: Software Engineering</h3>
+                          <p className="text-[10px] text-muted-foreground">Live Attendance Session</p>
+                        </div>
+                        <div className="flex items-center gap-1.5 px-2 py-1 bg-green-500/10 border border-green-500/20 rounded-full">
+                          <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                          <span className="text-[10px] font-semibold text-green-600 dark:text-green-400 uppercase tracking-wide">Live</span>
+                        </div>
+                      </div>
+
+                      <div className="flex gap-4 h-full">
+                        {/* QR Code Container */}
+                        <div className="w-1/3 bg-white dark:bg-zinc-900 border border-border/50 rounded-lg flex flex-col items-center justify-center p-3 shadow-sm relative overflow-hidden">
+                          {/* Animated Scan Line */}
+                          <div className="absolute top-0 left-0 w-full h-[2px] bg-primary/50 blur-[1px] animate-[scan_3s_ease-in-out_infinite]" />
+                          
+                          <QrCode className="w-16 h-16 text-zinc-900 dark:text-white mb-2" strokeWidth={1.5} />
+                          <div className="text-[10px] text-muted-foreground font-mono">CODE: <span className="font-bold text-foreground">AX89B</span></div>
+                        </div>
+
+                        {/* Real-time Student Feed */}
+                        <div className="flex-1 flex flex-col gap-2 relative">
+                          <div className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider mb-1">Recent Scans (124/150)</div>
+                          
+                          {/* Student Row 1 */}
+                          <div className="flex items-center justify-between bg-card border border-border/50 p-2 rounded-md shadow-sm">
+                            <div className="flex items-center gap-2">
+                              <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-[10px] font-bold text-primary">EJ</div>
+                              <div className="flex flex-col">
+                                <span className="text-xs font-semibold text-foreground">Ezekiel J.</span>
+                                <span className="text-[9px] text-muted-foreground">CSC/20/1234</span>
+                              </div>
+                            </div>
+                            <CheckCircle2 className="w-3.5 h-3.5 text-green-500" />
+                          </div>
+
+                          {/* Student Row 2 */}
+                          <div className="flex items-center justify-between bg-card border border-border/50 p-2 rounded-md shadow-sm">
+                            <div className="flex items-center gap-2">
+                              <div className="w-6 h-6 rounded-full bg-muted flex items-center justify-center text-[10px] font-bold text-muted-foreground">MS</div>
+                              <div className="flex flex-col">
+                                <span className="text-xs font-semibold text-foreground">Michael S.</span>
+                                <span className="text-[9px] text-muted-foreground">CSC/20/4567</span>
+                              </div>
+                            </div>
+                            <CheckCircle2 className="w-3.5 h-3.5 text-green-500" />
+                          </div>
+
+                          {/* Student Row 3 - Faded to show scroll */}
+                          <div className="flex items-center justify-between bg-card border border-border/50 p-2 rounded-md shadow-sm opacity-50">
+                            <div className="flex items-center gap-2">
+                              <div className="w-6 h-6 rounded-full bg-muted flex items-center justify-center text-[10px] font-bold text-muted-foreground">DS</div>
+                              <div className="flex flex-col">
+                                <span className="text-xs font-semibold text-foreground">Dwight S.</span>
+                                <span className="text-[9px] text-muted-foreground">CSC/20/8901</span>
+                              </div>
+                            </div>
+                            <CheckCircle2 className="w-3.5 h-3.5 text-green-500" />
+                          </div>
+
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
