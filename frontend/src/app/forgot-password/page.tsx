@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { GraduationCap, Mail, ArrowLeft, CheckCircle } from 'lucide-react';
+import { ScanLine, Mail, ArrowLeft, CheckCircle } from 'lucide-react';
 
 export default function ForgotPasswordPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -26,8 +26,8 @@ export default function ForgotPasswordPage() {
       <div className="w-full max-w-md animate-fade-in-up">
         {/* Brand */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-lg bg-primary mb-4 shadow-lg">
-            <GraduationCap className="w-8 h-8 text-primary-foreground" />
+          <div className="inline-flex items-center justify-center w-14 h-14 bg-primary text-primary-foreground mb-4 rounded-sm shadow-lg">
+            <ScanLine className="w-8 h-8" />
           </div>
           <h1 className="text-2xl font-bold text-foreground tracking-tight">
             Attendance

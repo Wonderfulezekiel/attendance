@@ -19,7 +19,7 @@ import {
   LogOut,
   ChevronLeft,
   ChevronRight,
-  GraduationCap,
+  ScanLine,
 } from 'lucide-react';
 import { Avatar } from '@/components/ui/avatar';
 import type { UserRole, NavItem } from '@/types';
@@ -82,8 +82,8 @@ export function Sidebar({ role, userName, userEmail }: SidebarProps) {
     >
       {/* Brand */}
       <div className="flex items-center gap-3 px-5 h-16 border-b border-border/50 shrink-0">
-        <div className="w-8 h-8 rounded-md bg-primary flex items-center justify-center shrink-0">
-          <GraduationCap className="w-5 h-5 text-primary-foreground" />
+        <div className="w-8 h-8 bg-primary text-primary-foreground flex items-center justify-center rounded-sm shrink-0">
+          <ScanLine className="w-5 h-5" />
         </div>
         {!collapsed && (
           <span className="text-lg font-bold text-foreground tracking-tight">

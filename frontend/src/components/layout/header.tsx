@@ -8,7 +8,7 @@ import {
   LogOut,
   Settings,
   User,
-  GraduationCap,
+  ScanLine,
 } from 'lucide-react';
 import { Avatar } from '@/components/ui/avatar';
 import { Dropdown } from '@/components/ui/dropdown';
@@ -106,8 +106,8 @@ export function Header({
         {/* Mobile brand - Centered */}
         <div className="md:hidden absolute inset-0 flex items-center justify-center pointer-events-none">
           <div className="flex items-center gap-2 pointer-events-auto">
-            <div className="w-7 h-7 rounded-sm bg-primary flex items-center justify-center">
-              <GraduationCap className="w-4 h-4 text-primary-foreground" />
+            <div className="w-7 h-7 bg-primary text-primary-foreground flex items-center justify-center rounded-sm">
+              <ScanLine className="w-4 h-4" />
             </div>
             <span className="text-base font-bold text-foreground">
               Attendance
