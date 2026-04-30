@@ -10,11 +10,14 @@ from app.config import settings
 def generate_session_code() -> str:
     return ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
 
-def generate_qr_jwt(session_id: str, course_id: str, expiry_time: datetime) -> str:
+def generate_qr_jwt(session_id: str, course_id: str, expiry_time: datetime = None) -> str:
+    from datetime import datetime, timedelta, timezone
+    # Enforce exactly 2-minute expiration from NOW for dynamic secure QR
+    exp_time = datetime.now(timezone.utc) + timedelta(minutes=2)
     payload = {
         "session_id": session_id,
         "course_id": course_id,
-        "exp": int(expiry_time.timestamp())
+        "exp": int(exp_time.timestamp())
     }
     return jwt.encode(payload, settings.jwt_secret, algorithm="HS256")
 

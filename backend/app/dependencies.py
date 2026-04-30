@@ -18,7 +18,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
         # We use an async HTTP request to Supabase to securely validate the token.
         # This completely prevents [WinError 10035] because it uses non-blocking asyncio,
         # unlike the synchronous supabase.auth.get_user() call.
-        async with httpx.AsyncClient() as client:
+        async with httpx.AsyncClient(timeout=15.0) as client:
             res = await client.get(
                 f"{settings.supabase_url}/auth/v1/user",
                 headers={

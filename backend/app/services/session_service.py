@@ -22,7 +22,7 @@ async def create_session(data: SessionCreate, lecturer_id: str):
         session_id = str(uuid.uuid4())
         session_code = generate_session_code()
         expiry_time = datetime.utcnow() + timedelta(minutes=data.duration_minutes)
-        jwt_value = generate_qr_jwt(session_id, data.course_id, expiry_time)
+        jwt_value = generate_qr_jwt(session_id, data.course_id)
 
         insert_data = {
             "id": session_id,
@@ -62,7 +62,9 @@ async def get_active_session(course_id: str):
     try:
         res = await supabase_async_admin.table('attendance_sessions').select('*').eq('course_id', course_id).eq('status', 'active').execute()
         if res.data:
-            return res.data[0]
+            session = res.data[0]
+            session['qr_code_value'] = generate_qr_jwt(session['id'], session['course_id'])
+            return session
         return None
     except Exception as e:
         print("DB Error in get_active_session:", e)
@@ -84,6 +86,10 @@ async def get_sessions(lecturer_id: str):
             # Attended
             attended = await supabase_async_admin.table('attendance_records').select('id', count='exact').eq('session_id', session['id']).execute()
             session['students_attended'] = attended.count or 0
+            
+            # Dynamic QR code regeneration for active sessions (2 mins validity)
+            if session['status'] == 'active':
+                session['qr_code_value'] = generate_qr_jwt(session['id'], session['course_id'])
             
         return sessions
     except Exception as e:
